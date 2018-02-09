@@ -1,4 +1,4 @@
-# Basic_Anime_Encoder# Basic Anime Encoder
+# Basic Anime Encoder
 
 -----
 
