@@ -4,7 +4,7 @@
 
 This is to be use to encode Anime
 
-If you want to encode anything else, use something else to enocde it
+If you want to encode anything else, use something else to encode it
 
 -----
 
