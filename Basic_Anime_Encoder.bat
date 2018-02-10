@@ -92,21 +92,25 @@ REM See above for details
 REM To activate remove the REM in front of SET
 REM DO NOT ACTIVATE resize AND crop SEPARATELY! USE cropNresize INSTEAD! ONE OF THE THREE SHOULD BE USED! NOT MORE THAN ONE
 
-ECHO Binary Path: %bpath%
-ECHO Binary: %binary%
-ECHO Demuxer used: %demuxer%
-ECHO Output destination: %odestination%
-IF DEFINED bitdepth (ECHO 10 bit encoding enabled) ELSE (ECHO 10 bit encoding disabled)
-IF DEFINED chroma (ECHO chroma encoding enabled) ELSE (ECHO chroma encoding disabled)
-ECHO FPS is set to %fps%
-ECHO Deblock is set to %deblock%
-ECHO psy-rd is set to %psyrd1%:%psyrd2%
-ECHO CRF is set to %crf%
-ECHO qcompis set to %qcomp%
-ECHO aq-strength is set to %aqstrength%
-ECHO If more than one of the three options below are enabled, you fucked up and need to abort!
-IF DEFINED crop (ECHO Video cropping is enabled) ELSE (ECHO Video cropping is disabled)
-IF DEFINED resize (ECHO Video resizing is enabled) ELSE (ECHO Video resizing is disabled)
-IF DEFINED cropNresize (ECHO Video cropping and resizing is enabled) ELSE (ECHO Video cropping and resizing is disabled)
+ECHO Binary Path: [92m%bpath%[0m
+ECHO Binary: [92m%binary%[0m
+ECHO Demuxer used: [92m%demuxer%[0m
+ECHO Output destination: [92m%odestination%[0m
+IF DEFINED bitdepth (ECHO 10 bit encoding [92menabled[0m) ELSE (ECHO 10 bit encoding [91mdisabled[0m)
+IF DEFINED chroma (ECHO chroma encoding [92menabled[0m) ELSE (ECHO chroma encoding [91mdisabled[0m)
+ECHO FPS is set to [92m%fps%[0m
+ECHO Deblock is set to [92m%deblock%[0m
+ECHO psy-rd is set to [92m%psyrd1%:%psyrd2%[0m
+ECHO CRF is set to [92m%crf%[0m
+ECHO qcompis set to [92m%qcomp%[0m
+ECHO aq-strength is set to [92m%aqstrength%[0m
+ECHO.
+ECHO [1m!!! If more than one of the three options below are enabled, you fucked up and need to abort! !!![0m
+IF DEFINED crop (ECHO Video cropping is [92menabled[0m) ELSE (ECHO Video cropping is [91mdisabled[0m)
+IF DEFINED resize (ECHO Video resizing is [92menabled[0m) ELSE (ECHO Video resizing is [91mdisabled[0m)
+IF DEFINED cropNresize (ECHO Video cropping and resizing is [92menabled[0m) ELSE (ECHO Video cropping and resizing is [91mdisabled[0m)
+ECHO.
+
+pause
 
 FOR %%A in (*.mkv) DO "%bpath%\%binary%" "%%A" --demuxer %demuxer% -o "%odestination%\%%~nA.mkv" - %bitdepth% %chroma% --force-cfr --fps %fps% --ref 16 --deblock %deblock% --me umh --subme 10 --psy-rd %psyrd1%:%psyrd2% --merange 32 --trellis 2 --no-dct-decimate --bframes 16 --b-adapt 2 --direct auto --slow-firstpass --no-fast-pskip --keyint 240 --min-keyint 24 --rc-lookahead 48 --crf %crf% --qcomp %qcomp% --aq-mode 3 --aq-strength %aqstrength% --qpmax 81 %crop% %resize% %cropNresize%
