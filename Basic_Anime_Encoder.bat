@@ -111,6 +111,4 @@ IF DEFINED resize (ECHO Video resizing is [92menabled[0m) ELSE (ECHO Video res
 IF DEFINED cropNresize (ECHO Video cropping and resizing is [92menabled[0m) ELSE (ECHO Video cropping and resizing is [91mdisabled[0m)
 ECHO.
 
-pause
-
 FOR %%A in (*.mkv) DO "%bpath%\%binary%" "%%A" --demuxer %demuxer% -o "%odestination%\%%~nA.mkv" - %bitdepth% %chroma% --force-cfr --fps %fps% --ref 16 --deblock %deblock% --me umh --subme 10 --psy-rd %psyrd1%:%psyrd2% --merange 32 --trellis 2 --no-dct-decimate --bframes 16 --b-adapt 2 --direct auto --slow-firstpass --no-fast-pskip --keyint 240 --min-keyint 24 --rc-lookahead 48 --crf %crf% --qcomp %qcomp% --aq-mode 3 --aq-strength %aqstrength% --qpmax 81 %crop% %resize% %cropNresize%
