@@ -46,6 +46,11 @@ REM Turned off by default
 REM Activates 444 chroma encoding
 REM To activate remove the REM in front of SET
 
+SET fps=24000/1001
+REM Sets the frame rate for the video
+REM 24000/1001 means 23.976 fps
+REM I would suggest keeping it as is, but changing it is up to you
+
 SET deblock=-1:-1
 REM -2:-2 for BD, -1:-1 for WEB, 0:-1 for MPEG2
 
@@ -93,6 +98,7 @@ ECHO Demuxer used: %demuxer%
 ECHO Output destination: %odestination%
 IF DEFINED bitdepth (ECHO 10 bit encoding enabled) ELSE (ECHO 10 bit encoding disabled)
 IF DEFINED chroma (ECHO chroma encoding enabled) ELSE (ECHO chroma encoding disabled)
+ECHO FPS is set to %fps%
 ECHO Deblock is set to %deblock%
 ECHO psy-rd is set to %psyrd1%:%psyrd2%
 ECHO CRF is set to %crf%
@@ -103,4 +109,4 @@ IF DEFINED crop (ECHO Video cropping is enabled) ELSE (ECHO Video cropping is di
 IF DEFINED resize (ECHO Video resizing is enabled) ELSE (ECHO Video resizing is disabled)
 IF DEFINED cropNresize (ECHO Video cropping and resizing is enabled) ELSE (ECHO Video cropping and resizing is disabled)
 
-FOR %%A in (*.mkv) DO "%bpath%\%binary%" "%%A" --demuxer %demuxer% -o "%odestination%\%%~nA.mkv" - %bitdepth% %chroma% --ref 16 --deblock %deblock% --me umh --subme 10 --psy-rd %psyrd1%:%psyrd2% --merange 32 --trellis 2 --no-dct-decimate --bframes 16 --b-adapt 2 --direct auto --slow-firstpass --no-fast-pskip --keyint 240 --min-keyint 24 --rc-lookahead 48 --crf %crf% --qcomp %qcomp% --aq-mode 3 --aq-strength %aqstrength% --qpmax 81 %crop% %resize% %cropNresize%
+FOR %%A in (*.mkv) DO "%bpath%\%binary%" "%%A" --demuxer %demuxer% -o "%odestination%\%%~nA.mkv" - %bitdepth% %chroma% --force-cfr --fps %fps% --ref 16 --deblock %deblock% --me umh --subme 10 --psy-rd %psyrd1%:%psyrd2% --merange 32 --trellis 2 --no-dct-decimate --bframes 16 --b-adapt 2 --direct auto --slow-firstpass --no-fast-pskip --keyint 240 --min-keyint 24 --rc-lookahead 48 --crf %crf% --qcomp %qcomp% --aq-mode 3 --aq-strength %aqstrength% --qpmax 81 %crop% %resize% %cropNresize%
