@@ -1,9 +1,9 @@
 @ECHO OFF
 
-SET deblock=-1,-1
+SET deblock=-2,-2
 REM -2,-2 for BD, -1,-1 for WEB, 0,-1 for MPEG2
 
-SET psyrd1=0.70
+SET psyrd1=0.80
 REM 0.80 for BD, 0.70 for WEB, 0.60 for MPEG2
 
 SET psyrd2=0.00
@@ -12,7 +12,7 @@ REM 0.00 for Clean, 0.10 for Grain
 SET qcomp=0.70
 REM Value range 0.60 - 0.90
 
-SET aqstrength=0.85
+SET aqstrength=0.75
 REM 0.60 for Grain, 0.75 for Normal, 0.90 for Static grain
 
 ECHO Deblock is set to [92m%deblock%[0m
