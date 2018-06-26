@@ -41,7 +41,7 @@ REM Turned on by default
 REM Activates 10 bit encoding
 REM To turn off, add REM in front of SET
 
-REM SET chroma=--input-csp i444 --output-csp i444 --chroma-qp-offset -4
+REM SET chroma=--input-csp i444 --output-csp i444 --chroma-qp-offset -3
 REM Turned off by default
 REM Activates 444 chroma encoding
 REM To activate remove the REM in front of SET
@@ -85,10 +85,13 @@ REM Make sure to use the proper method!
 REM To activate remove the REM in front of SET
 REM DO NOT ACTIVATE crop SEPARATELY! USE cropNresize INSTEAD! ONE OF THE THREE SHOULD BE USED! NOT MORE THAN ONE
 
-REM SET cropNresize=--video-filter crop:0,0,0,0/resize:width=1280,height=720,method=bicubic
+REM SET cropNresize=--video-filter crop:0,0,0,0/resize:width=1280,height=720,sar=1:1,method=bicubic
 REM Turned off by default
 REM Used to crop AND resize
 REM See above for details
+REM SAR was added if you plan to do both
+REM Sets the SAR and resizes frames to a new resolution to avoid stretching
+REM SAR is storage aspect ratio, which is the ratio of pixel dimensions
 REM To activate remove the REM in front of SET
 REM DO NOT ACTIVATE resize AND crop SEPARATELY! USE cropNresize INSTEAD! ONE OF THE THREE SHOULD BE USED! NOT MORE THAN ONE
 
@@ -102,7 +105,7 @@ ECHO FPS is set to [92m%fps%[0m
 ECHO Deblock is set to [92m%deblock%[0m
 ECHO psy-rd is set to [92m%psyrd1%:%psyrd2%[0m
 ECHO CRF is set to [92m%crf%[0m
-ECHO qcompis set to [92m%qcomp%[0m
+ECHO qcomp is set to [92m%qcomp%[0m
 ECHO aq-strength is set to [92m%aqstrength%[0m
 ECHO.
 ECHO [1m!!! If more than one of the three options below are enabled, you fucked up and need to abort! !!![0m
