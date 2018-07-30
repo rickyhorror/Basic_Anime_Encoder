@@ -46,6 +46,12 @@ REM Turned off by default
 REM Activates 444 chroma encoding
 REM To activate remove the REM in front of SET
 
+SET tune=animation
+REM Set this depending on what you are encoding
+REM Tunes: animation, film
+REM animation would be for cartoons and anime
+REM film is live action
+
 SET fps=24000/1001
 REM Sets the frame rate for the video
 REM 24000/1001 means 23.976 fps
@@ -80,4 +86,20 @@ REM SAR is storage aspect ratio, which is the ratio of pixel dimensions
 REM To activate remove the REM in front of SET
 REM DO NOT ACTIVATE resize AND crop SEPARATELY! USE cropNresize INSTEAD! ONE OF THE THREE SHOULD BE USED! NOT MORE THAN ONE
 
-FOR %%A in (*.mkv) DO "%bpath%\%binary%" "%%A" --demuxer %demuxer% -o "%odestination%\%%~nA.mkv" - %bitdepth% %chroma% --force-cfr --fps %fps% --tune animation --preset veryslow --keyint 240 --min-keyint 24 --crf %crf% %crop% %resize% %cropNresize%
+ECHO Binary Path: [92m%bpath%[0m
+ECHO Binary: [92m%binary%[0m
+ECHO Demuxer used: [92m%demuxer%[0m
+ECHO Output destination: [92m%odestination%[0m
+IF DEFINED bitdepth (ECHO 10 bit encoding [92menabled[0m) ELSE (ECHO 10 bit encoding [91mdisabled[0m)
+IF DEFINED chroma (ECHO chroma encoding [92menabled[0m) ELSE (ECHO chroma encoding [91mdisabled[0m)
+ECHO FPS is set to [92m%fps%[0m
+ECHO CRF is set to [92m%crf%[0m
+ECHO Tune is set to [92m%tune%[0m
+ECHO.
+ECHO [1m!!! If more than one of the three options below are enabled, you fucked up and need to abort! !!![0m
+IF DEFINED crop (ECHO Video cropping is [92menabled[0m) ELSE (ECHO Video cropping is [91mdisabled[0m)
+IF DEFINED resize (ECHO Video resizing is [92menabled[0m) ELSE (ECHO Video resizing is [91mdisabled[0m)
+IF DEFINED cropNresize (ECHO Video cropping and resizing is [92menabled[0m) ELSE (ECHO Video cropping and resizing is [91mdisabled[0m)
+ECHO.
+
+FOR %%A in (*.mkv) DO "%bpath%\%binary%" "%%A" --demuxer %demuxer% -o "%odestination%\%%~nA.mkv" - %bitdepth% %chroma% --force-cfr --fps %fps% --tune %tune% --preset veryslow --keyint 240 --min-keyint 24 --crf %crf% %crop% %resize% %cropNresize%
